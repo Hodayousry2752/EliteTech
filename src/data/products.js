@@ -11,6 +11,49 @@ export const generateProducts = () => {
     { id: 'cameras', name_ar: 'كاميرات', name_en: 'Cameras' }
   ];
 
+  const categoryImages = {
+    smartphones: [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+      "https://images.unsplash.com/photo-1510557880182-3c1d3f1d7a7b",
+      "https://images.unsplash.com/photo-1512499617640-c2f999098c01"
+    ],
+    laptops: [
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+      "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
+    ],
+    headphones: [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+      "https://images.unsplash.com/photo-1511385348-a52b4a160dc2",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944"
+    ],
+    chargers: [
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90",
+      "https://images.unsplash.com/photo-1609592424823-5b2b8cba3f64",
+      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0"
+    ],
+    smartwatches: [
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+      "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b"
+    ],
+    accessories: [
+      "https://images.unsplash.com/photo-1512499617640-c2f999098c01",
+      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad",
+      "https://images.unsplash.com/photo-1606813907291-d86efa9b94db"
+    ],
+    tablets: [
+      "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0",
+      "https://images.unsplash.com/photo-1517331156700-3c241d2b4d83",
+      "https://images.unsplash.com/photo-1587614382346-ac6d4c96c0e1"
+    ],
+    cameras: [
+      "https://images.unsplash.com/photo-1519183071298-a2962be96b02",
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+      "https://images.unsplash.com/photo-1502920917128-1aa500764b8a"
+    ]
+  };
+
   const colors = {
     smartphones: ['أسود', 'أبيض', 'أزرق', 'ذهبي', 'أرجواني'],
     laptops: ['فضي', 'رمادي', 'ذهبي', 'أزرق داكن'],
@@ -23,6 +66,7 @@ export const generateProducts = () => {
   };
 
   const storage = ['64GB', '128GB', '256GB', '512GB', '1TB'];
+
   const tagsList = [
     'شحن سريع', 'عزل صوت', 'مقاوم للماء', 'واي فاي 6', 'بلوتوث 5.3', 'شاشة أموليد',
     'بطارية تدوم طويلاً', 'معالج قوي', 'كاميرا احترافية', 'تصميم أنيق', 'خفيف الوزن',
@@ -30,6 +74,7 @@ export const generateProducts = () => {
   ];
 
   const products = [];
+
   const productBases = [
     { ar: 'آيفون برو ماكس', en: 'iPhone Pro Max', cat: 'smartphones', basePrice: 4200 },
     { ar: 'جالاكسي إس الترا', en: 'Galaxy S Ultra', cat: 'smartphones', basePrice: 3800 },
@@ -60,69 +105,69 @@ export const generateProducts = () => {
     const base = productBases[i % productBases.length];
     const category = categories.find(c => c.id === base.cat);
     const variantIndex = Math.floor(i / productBases.length);
+
     const productNameAr = `${base.ar} ${variantIndex > 0 ? `(الجيل ${variantIndex + 1})` : ''}`;
     const productNameEn = `${base.en} ${variantIndex > 0 ? `(Gen ${variantIndex + 1})` : ''}`;
-    
+
     const discountPercent = [0, 10, 15, 20, 25][Math.floor(Math.random() * 5)];
     const basePrice = base.basePrice + (variantIndex * 150);
     const finalPrice = discountPercent > 0 ? basePrice * (1 - discountPercent / 100) : basePrice;
     const wholesalePrice = Math.round(basePrice * 0.75);
-    
+
     const colorOptions = colors[base.cat] || colors.accessories;
     const selectedColors = colorOptions.slice(0, Math.min(4, colorOptions.length));
     const storageOptions = storage.slice(0, Math.min(3, storage.length));
-    
+
+    const imagesList = categoryImages[base.cat];
+    const imgIndex = i % imagesList.length;
+
     const descriptionAr = `
       <div dir="rtl">
         <h3>المواصفات التقنية</h3>
-        <p>يتميز ${productNameAr} بأحدث التقنيات المتطورة مع معالج فائق السرعة وشاشة عالية الدقة.</p>
-        <h3>المميزات الرئيسية</h3>
-        <ul><li>شاشة بتقنية Super Retina XDR</li><li>معالج متطور</li><li>بطارية تدوم طويلاً</li><li>كاميرا احترافية</li><li>مقاوم للماء والغبار</li><li>دعم الجيل الخامس</li></ul>
-        <h3>حالات الاستخدام</h3>
-        <p>مثالي للمصورين، اللاعبين، المحترفين في العمل، والطلاب.</p>
-        <p>الجهاز يأتي بضمان لمدة سنتين وشحن سريع.</p>
+        <p>يتميز ${productNameAr} بأحدث التقنيات المتطورة مع أداء قوي وتصميم عصري يناسب الاستخدام اليومي.</p>
+        <h3>المميزات</h3>
+        <ul>
+          <li>أداء سريع</li>
+          <li>بطارية قوية</li>
+          <li>تصميم أنيق</li>
+        </ul>
       </div>
     `;
-    
+
     const descriptionEn = `
       <h3>Technical Specifications</h3>
-      <p>The ${productNameEn} features cutting-edge technology.</p>
-      <h3>Key Features</h3>
-      <ul><li>Super Retina XDR Display</li><li>Advanced processor</li><li>Long battery life</li><li>Professional camera</li><li>Water & dust resistance</li><li>5G support</li></ul>
-      <h3>Use Cases</h3>
-      <p>Perfect for photographers, gamers, professionals, and students.</p>
-      <p>Comes with 2-year warranty and fast charging.</p>
+      <p>${productNameEn} delivers powerful performance with a modern design.</p>
     `;
-    
+
     const randomTags = [];
     const numTags = 3 + Math.floor(Math.random() * 3);
     for (let t = 0; t < numTags; t++) {
       const tag = tagsList[Math.floor(Math.random() * tagsList.length)];
       if (!randomTags.includes(tag)) randomTags.push(tag);
     }
-    
+
     products.push({
       id: i + 1,
       name_ar: productNameAr,
       name_en: productNameEn,
       description_ar: descriptionAr,
       description_en: descriptionEn,
-      category: category,
+      category,
       categoryId: category.id,
-      basePrice: basePrice,
+      basePrice,
       finalPrice: Math.round(finalPrice),
-      discountPercent: discountPercent,
-      wholesalePrice: wholesalePrice,
+      discountPercent,
+      wholesalePrice,
       colors: selectedColors,
       storage: storageOptions,
       tags: randomTags,
       images: [
-        `https://picsum.photos/id/${100 + i}/500/500`,
-        `https://picsum.photos/id/${200 + i}/500/500`,
-        `https://picsum.photos/id/${300 + i}/500/500`
+        imagesList[imgIndex],
+        imagesList[(imgIndex + 1) % imagesList.length],
+        imagesList[(imgIndex + 2) % imagesList.length]
       ],
-      seoKeywords: [`${productNameEn}`, `${productNameAr}`, 'electronic', 'premium', category.name_en, ...randomTags.slice(0, 2)],
-      metaDescription: `Buy ${productNameEn} - ${productNameAr} with best price. Features: ${randomTags.slice(0, 3).join(', ')}. Fast shipping.`,
+      seoKeywords: [productNameEn, productNameAr, category.name_en],
+      metaDescription: `Buy ${productNameEn} at best price`,
       rating: 4 + Math.random(),
       reviews: Math.floor(Math.random() * 500) + 10,
       inStock: true,
@@ -130,15 +175,14 @@ export const generateProducts = () => {
       warranty: '2 years manufacturer warranty'
     });
   }
-  
-  // Add cross-sell and upsell relationships
+
   products.forEach(product => {
     const sameCategory = products.filter(p => p.categoryId === product.categoryId && p.id !== product.id);
     const shuffled = [...sameCategory].sort(() => 0.5 - Math.random());
     product.crossSellIds = shuffled.slice(0, 3).map(p => p.id);
     product.upsellIds = shuffled.slice(3, 6).map(p => p.id);
   });
-  
+
   return products;
 };
 

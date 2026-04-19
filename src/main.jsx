@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -11,13 +11,13 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#6366f1', // Indigo 500
+      main: '#6366f1',
       light: '#818cf8',
       dark: '#4f46e5',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#ec4899', // Pink 500
+      main: '#ec4899',
       light: '#f472b6',
       dark: '#db2777',
     },
@@ -121,13 +121,13 @@ const globalStyles = (
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <BrowserRouter>
+      <HashRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {globalStyles}
           <App />
         </ThemeProvider>
-      </BrowserRouter>
+      </HashRouter>
     </HelmetProvider>
   </React.StrictMode>,
 )
